@@ -597,7 +597,7 @@ class TabsRouter extends RoutingController {
   /// if activeIndex != homeIndex
   /// set activeIndex to homeIndex
   /// else pop parent
-  final int homeIndex;
+  int homeIndex;
 
   /// Default constructor
   TabsRouter(
@@ -610,6 +610,14 @@ class TabsRouter extends RoutingController {
       : matcher = RouteMatcher(routeCollection),
         _parent = parent,
         _routeData = routeData;
+
+  void setHomeIndex(int index, {bool notify = true}) {
+    if (homeIndex != index) {
+      homeIndex = index;
+      if (notify) {
+        notifyAll();
+      }
+    }
 
   @override
   RouteData get routeData => _routeData;
